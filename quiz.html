@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WikiAlash</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="alas11.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f49883c97d.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url('1200_0_ed68641bb16a09593b782624864d6d4b.jpg');
+            /* Set the background image */
+            background-size: cover;
+            /* Cover the entire page */
+            background-repeat: no-repeat;
+            /* Do not repeat the image */
+            background-attachment: fixed;
+            /* Fix the background image */
+            color: white;
+        }
+
+        .container {
+            background-color: #14004acd;
+            /* Semi-transparent background for content */
+        }
+
+        .feedback {
+            margin-top: 0.5em;
+        }
+
+        #result {
+            margin-top: 1em;
+            font-size: 1.2em;
+        }
+
+        .placeholder-img {
+            background-color: #14004a;
+            text-align: center;
+            color: white;
+        }
+
+        .ripple {
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+            position: fixed;
+            border-radius: 50%;
+            border: 1px solid #ffffff59;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(15);
+                opacity: 0.01;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html"><i class="fa-brands fa-wikipedia-w"></i> WikiAlash</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i> Main</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="history.html"><i class="fa-solid fa-book"></i> History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html"><i class="fa-solid fa-address-book"></i> Contact</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="quiz.html"><i class="fa-solid fa-check-to-slot"></i> Quiz <span
+                            class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center">Alash Orda History Quiz</h1>
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="form-group">
+                <label for="question1">Question 1: Who founded Alash Orda?</label>
+                <select class="form-control" id="question1">
+                    <option value="correct">Alikhan Bukeikhanov</option>
+                    <option value="wrong">Abai Kunanbaev</option>
+                    <option value="wrong">Nursultan Nazarbayev</option>
+                </select>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="form-group">
+                <label for="question2">Question 2: In which year was Alash Orda established?</label>
+                <select class="form-control" id="question2">
+                    <option value="wrong">1881</option>
+                    <option value="correct">1917</option>
+                    <option value="wrong">1922</option>
+                </select>
+                <div class="feedback" id="feedback2"></div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="form-group">
+                <label for="question3">Question 3: What was the primary ideology of Alash Orda?</label>
+                <select class="form-control" id="question3">
+                    <option value="correct">Autonomy</option>
+                    <option value="wrong">Socialism</option>
+                    <option value="wrong">Communism</option>
+                </select>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="form-group">
+                <label for="question4">Question 4: What was the main goal of Alash Orda?</label>
+                <select class="form-control" id="question4">
+                    <option value="wrong">To establish a monarchy</option>
+                    <option value="correct">To gain autonomy for Kazakhstan</option>
+                    <option value="wrong">To join the Russian Empire</option>
+                </select>
+                <div class="feedback" id="feedback4"></div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="form-group">
+                <label for="question5">Question 5: Who were the primary opponents of Alash Orda?</label>
+                <select class="form-control" id="question5">
+                    <option value="wrong">Ottoman Empire</option>
+                    <option value="correct">Bolsheviks</option>
+                    <option value="wrong">Mongol Empire</option>
+                </select>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="submitQuiz()">Submit Answers</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <footer class="bg-dark text-center text-white">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <i class="fa-solid fa-copyright"></i> Aldiar Andrian MT-2201 2023:
+            <a id="github" class="text-white" href="https://github.com/yourusername/yourrepository">Github</a>
+        </div>
+    </footer>
+
+    <!-- Sound Effect -->
+    <audio id="mouseoverSound" src="click.mp3"></audio>
+    <audio id="beepSound" src="beep.mp3"></audio>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+
+        document.addEventListener('click', applyCursorRippleEffect);
+
+        function applyCursorRippleEffect(e) {
+            const ripple = document.createElement("div");
+
+            ripple.className = "ripple";
+            document.body.appendChild(ripple);
+
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY}px`;
+
+            ripple.style.animation = "ripple-effect .4s linear";
+            ripple.onanimationend = () => document.body.removeChild(ripple);
+        }
+
+        document.getElementById('github').addEventListener('mouseover', function () {
+            document.getElementById('mouseoverSound').play();
+        });
+
+        function submitQuiz() {
+            // Play the beep sound
+            document.getElementById('beepSound').play();
+
+            var totalQuestions = 5;
+            var score = 0;
+
+            for (var i = 1; i <= totalQuestions; i++) {
+                var question = document.getElementById('question' + i);
+                var feedback = document.getElementById('feedback' + i);
+
+                if (question.value === 'correct') {
+                    feedback.textContent = 'Correct!';
+                    feedback.style.color = 'green';
+                    score++;
+                } else {
+                    feedback.textContent = 'Wrong answer!';
+                    feedback.style.color = 'red';
+                }
+            }
+
+            var result = document.getElementById('result');
+            result.textContent = 'You got ' + score + ' out of ' + totalQuestions + ' questions right.';
+            if (score === totalQuestions) {
+                result.style.color = 'gold';
+            } else {
+                result.style.color = 'white';
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
